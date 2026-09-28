@@ -3,7 +3,7 @@ x-milvus-image: &milvus-image milvusdb/milvus:v3.0.2
 services:
   # ---- Vector store (Milvus standalone, integrated stack) ----------------
   # Local dev without Docker uses Milvus Lite (embedded, no services below).
-  # Set VECTOR_STORE_BACKEND=milvus and MILVUS_URI=http://milvus-standalone:19530
+  # Set VECTOR_STORE_BACKEND=milvus and VECTOR_STORE_URI=http://milvus-standalone:19530
   # in backend's environment to use this stack instead.
   milvus-volume-init:
     image: *milvus-image
@@ -116,7 +116,7 @@ services:
       - .env
     environment:
       DRONE_GATEWAY_URL: http://drone-gateway:8100
-      MILVUS_URI: http://milvus-standalone:19530
+      VECTOR_STORE_URI: http://milvus-standalone:19530
       VECTOR_STORE_BACKEND: milvus
       DATA_SOPS_DIR: /data/sops
       DATA_IMAGES_DIR: /data/images
@@ -143,9 +143,14 @@ services:
   frontend:
     build:
       context: ./frontend
+      # NEXT_PUBLIC_* are baked in at build time and must be reachable from
+      # the operator's browser (the host's mapped ports), not Docker's
+      # internal network — see the comment in frontend/Dockerfile.
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+        NEXT_PUBLIC_GATEWAY_BASE_URL: http://localhost:8100
+        NEXT_PUBLIC_INFERENCE_MODE: live
     container_name: drishti-frontend
-    environment:
-      NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
     ports:
       - "3000:3000"
     depends_on:

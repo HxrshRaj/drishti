@@ -1,0 +1,60 @@
+{
+  "n_total": 20,
+  "overall_accuracy": 1.0,
+  "group_results": [
+    {
+      "group_key": "brightness_bin",
+      "group_value": "medium",
+      "n": 12,
+      "accuracy": 1.0,
+      "low_confidence_note": false
+    },
+    {
+      "group_key": "brightness_bin",
+      "group_value": "low",
+      "n": 7,
+      "accuracy": 1.0,
+      "low_confidence_note": true
+    },
+    {
+      "group_key": "brightness_bin",
+      "group_value": "high",
+      "n": 1,
+      "accuracy": 1.0,
+      "low_confidence_note": true
+    },
+    {
+      "group_key": "resolution_bin",
+      "group_value": "high_res",
+      "n": 19,
+      "accuracy": 1.0,
+      "low_confidence_note": false
+    },
+    {
+      "group_key": "resolution_bin",
+      "group_value": "mid_res",
+      "n": 1,
+      "accuracy": 1.0,
+      "low_confidence_note": true
+    },
+    {
+      "group_key": "scene_mix",
+      "group_value": "mixed",
+      "n": 10,
+      "accuracy": 1.0,
+      "low_confidence_note": false
+    },
+    {
+      "group_key": "scene_mix",
+      "group_value": "vehicle_only",
+      "n": 10,
+      "accuracy": 1.0,
+      "low_confidence_note": false
+    }
+  ],
+  "flags": [],
+  "gap_threshold_pp": 10.0,
+  "min_group_samples": 10,
+  "source_file": "manual_check_20.jsonl",
+  "n_parse_failed_excluded": 0
+}

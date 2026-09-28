@@ -18,12 +18,14 @@ crewai==1.15.22
 
 # Vector store / RAG
 pymilvus[milvus-lite]==3.0.2
+milvus-lite==3.2.1
 pinecone==10.0.0
 sentence-transformers==6.1.0
 
 # Perception (VLM)
 transformers==5.17.0
 torch==2.14.0
+torchvision==0.29.0
 accelerate==1.15.0
 pillow==12.3.0
 

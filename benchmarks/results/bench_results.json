@@ -1,0 +1,37 @@
+{
+  "hardware": "CPU only (no GPU available in this environment)",
+  "n_images": 2,
+  "seed": 5,
+  "native_resolution": [
+    1400,
+    788
+  ],
+  "configs": [
+    {
+      "config": "fp32_native_resolution",
+      "device": "cpu",
+      "resize_to": "native",
+      "n_images": 2,
+      "latency_ms_p50": 32060.457600004156,
+      "latency_ms_p95": 32060.457600004156,
+      "latency_ms_mean": 31576.054900004237,
+      "throughput_img_per_s": 0.0316695674354134,
+      "peak_gpu_memory_mb": null
+    },
+    {
+      "config": "fp32_half_resolution",
+      "device": "cpu",
+      "resize_to": [
+        700,
+        394
+      ],
+      "n_images": 2,
+      "latency_ms_p50": 30189.65319999552,
+      "latency_ms_p95": 30189.65319999552,
+      "latency_ms_mean": 30187.64729999384,
+      "throughput_img_per_s": 0.03312613235680026,
+      "peak_gpu_memory_mb": null
+    }
+  ],
+  "note": "fp16/4-bit/8-bit/batch-size/vLLM comparisons are GPU-only in practice here and are shipped as benchmarks/colab_bench.ipynb, pending a user GPU run \u2014 see docs/benchmarks.md."
+}

@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* This dashboard is intentionally dark-themed via Tailwind utility classes
+   directly on <body> (see layout.tsx), not via prefers-color-scheme — so
+   no separate --background/--foreground custom properties are defined
+   here (an earlier version of this file set them as unlayered rules,
+   which beat Tailwind's layered utility classes regardless of specificity
+   and made body text always render in light-mode colors). */
+
+/* Form controls don't inherit text/caret color from the body by default
+   in most browsers' UA stylesheets — without this, dark-mode inputs
+   render invisible dark-on-dark text. */
+input,
+select,
+textarea {
+  color: inherit;
+  caret-color: currentColor;
+}

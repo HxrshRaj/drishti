@@ -1,0 +1,15 @@
+{
+  "source": "manual_check_20.jsonl",
+  "n_images": 20,
+  "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+  "device": "cpu",
+  "parse_failures": 0,
+  "parse_failure_rate": 0.0,
+  "overall_accuracy": 1.0,
+  "accuracy_note": "Coarse presence-detection accuracy (does the finding_type's coarse category \u2014 vehicle/personnel/none \u2014 match ground truth), not a closed-set classification accuracy. See docs/limitations.md: in this sample the model defaults to vehicle_presence for nearly every image, and nearly every VisDrone image contains a vehicle, so this number is inflated by class imbalance, not a sign of strong discrimination \u2014 reported honestly, not celebrated.",
+  "latency_ms_p50": 32098.56260000379,
+  "latency_ms_p95": 50829.546399996616,
+  "latency_ms_mean": 33119.6870399981,
+  "latency_ms_min": 27881.220600000233,
+  "latency_ms_max": 50829.546399996616
+}

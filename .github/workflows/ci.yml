@@ -20,7 +20,7 @@ jobs:
           cache: "pip"
           cache-dependency-path: backend/requirements-dev.txt
       - name: Install CPU torch first (smaller, avoids CUDA wheels on CI)
-        run: pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu
+        run: pip install torch==2.14.0 torchvision==0.29.0 --index-url https://download.pytorch.org/whl/cpu
       - name: Install backend deps
         run: pip install -r requirements-dev.txt
       - name: Ruff lint
@@ -29,7 +29,7 @@ jobs:
         env:
           DEVICE: cpu
           VECTOR_STORE_BACKEND: milvus_lite
-          MILVUS_URI: ./data/ci_milvus_lite.db
+          VECTOR_STORE_URI: ./data/ci_milvus_lite.db
           DATA_SOPS_DIR: ../data/sops
           DATA_IMAGES_DIR: ../data/images
           DATA_LABELS_FILE: ../data/labels/labels.jsonl
@@ -70,7 +70,7 @@ jobs:
           cache: "pip"
           cache-dependency-path: backend/requirements-dev.txt
       - name: Install CPU torch first
-        run: pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu
+        run: pip install torch==2.14.0 torchvision==0.29.0 --index-url https://download.pytorch.org/whl/cpu
       - name: Install backend deps
         run: pip install -r requirements-dev.txt
       - name: Run VLM + retrieval eval (CPU, small subset)

@@ -99,12 +99,54 @@ Without Docker, each service can run directly — see the README in
 | Pinecone live run | *Pending user's `PINECONE_API_KEY`.* |
 | GCP deployment | *Pending `gcloud` auth — see `deploy/gcp/`.* |
 
-This table is a summary; the authoritative, evidence-backed version is in
-the final report at the bottom of this README (added once all phases are
-verified) and in `docs/limitations.md`.
+This table is a summary; the authoritative, evidence-backed version is the
+**Final report** section at the bottom of this README, and `docs/limitations.md`.
 
 ## License
 
 Code is MIT-licensed (see `LICENSE`). The sampled imagery under
 `data/images/` and `data/labels/` is CC BY-NC-SA 3.0 (non-commercial) —
 see `docs/data.md`.
+
+---
+
+## Final report
+
+### Verified and safe to claim (with evidence)
+
+| Capability | Evidence |
+|---|---|
+| Simulated drone fleet, real HTTP API, failure injection | `drone-gateway/tests/test_fleet.py` — 9/9 passing against the real sampled dataset. `POST /admin/inject_failure` exercised for real (not mocked) in `backend/tests/test_mission_graph.py`. |
+| Licensed aerial imagery, documented provenance | `docs/data.md` — 350 images sampled from VisDrone2019-DET, CC BY-NC-SA 3.0, committed to the repo. |
+| Two-stage VLM perception, schema-validated JSON, retry + parse-failure tracking | `docs/benchmarks.md` — 20-image hand-verified run, 0% parse failure rate, real latency (p50 32.1s / p95 50.8s on CPU). The single-stage design's failure mode is documented with actual raw model outputs. |
+| RAG over the SOP corpus | `docs/benchmarks.md` — recall@1 92.9%, recall@5 100% over a 28-query hand-labeled set, real run (`benchmarks/eval_retrieval.py`). |
+| Persistent memory across missions | `backend/tests/test_memory_repository.py::test_second_mission_sees_first_missions_open_findings` — passing. |
+| LangGraph mission workflow with checkpointed pause/resume | `backend/tests/test_mission_graph.py` — 5/5 passing, real HTTP calls to a real gateway subprocess, real interrupt()/Command(resume=...) cycle. |
+| AutoGen Perception-vs-Verifier exchange | `backend/app/agents/verifier.py`, exercised in a real end-to-end mission run (see below) — real two-agent message exchange logged verbatim to the audit trail. |
+| CrewAI Analyst + Report Writer crew, real pandas tool | `backend/tests/test_reporting_tools.py` (tool logic) + a real end-to-end mission run producing a real (imperfect — see Limitations) narrative report, persisted and viewable in the frontend. |
+| Safety policy + approval gates | `backend/tests/test_safety_gate.py` — 14/14 passing, including the required "blocked, then approved" test. |
+| Fallback protocols (low confidence, drone offline, capture timeout) | `backend/tests/test_mission_graph.py` — all three exercised via real failure injection, not mocked exceptions. |
+| Structured JSON audit logging (works with zero credentials) | `backend/tests/test_observability.py` — every audit event emits a structured log line. |
+| Full end-to-end mission (real backend + real gateway + real frontend) | Run live during development: mission `fcbdcdf4929a4841` (harbor-industrial-park) — planned → dispatched → captured → perceived → verified (agree) → recorded → reported → completed, ~7 minutes wall clock, viewable at `/missions/fcbdcdf4929a4841` once the stack is running. |
+| Operator dashboard (Next.js 16) | All 5 pages (missions, mission detail, findings, approvals, metrics) verified rendering real backend data in a real browser session; `npm run build` and `npm run lint` both clean. |
+| CI (lint + tests + eval, CPU) | `.github/workflows/ci.yml` — runs backend/gateway/benchmarks tests, ruff, and the perception+retrieval evals on every push. |
+
+### Simulated or limited (stated plainly, not hidden)
+
+- **The drone fleet is 100% simulated** — see the "Simulated fleet" badge on every page of the dashboard. No physical hardware anywhere.
+- **Domain mismatch**: VisDrone is a traffic/pedestrian surveillance dataset, not a structural-defect inspection dataset — findings are object-presence observations, not crack/corrosion detection. See `docs/data.md`.
+- **CrewAI report quality with the local 0.5B model is real but rough** — the live end-to-end run's report includes ungrounded filler ("checking for any signs of tampering") and repeats sections. The independently pandas-computed summary is always included alongside it precisely because the LLM's narrative isn't fully trustworthy on its own — see `docs/limitations.md`.
+- **The parity report's "100% accuracy, no flags" result is a weak signal**, not a clean bill of health — explained honestly in `docs/bias-report.md` (small, vehicle-heavy sample; most groups below the confidence threshold).
+- **AutoGen's verifier doesn't do live tool-calls** — SOP/memory retrieval is a Python pre-step, not the LLM calling a tool live (a deliberate trade-off given the local model's function-calling reliability — see `docs/architecture.md`).
+- **Resizing input images doesn't meaningfully speed up inference** — a real, slightly counterintuitive CPU benchmark finding, documented rather than omitted.
+
+### Pending: needs credentials or hardware this environment doesn't have
+
+- **GPU benchmark numbers** — `benchmarks/colab_bench.ipynb` is written and ready to run on a free Colab/Kaggle GPU; not run here (no GPU in this environment).
+- **Pinecone live run** — `app/vectorstore/pinecone_store.py` is implemented against the current Pinecone SDK; not exercised without `PINECONE_API_KEY`.
+- **LangSmith live traces** — `app/observability/langsmith.py` activates automatically once `LANGSMITH_API_KEY` is set; not exercised here without one.
+- **GCP deployment** — `deploy/gcp/deploy.sh` is written and ready to run; not run here (no `gcloud` installed/authenticated in this environment).
+- **Frontend hosting (Vercel or similar)** — not attempted for the same reason.
+- **AutoGen with a hosted Anthropic model** — falls back to the local model or `OPENAI_API_KEY`; the `autogen-ext[anthropic]` extra isn't installed (see `docs/limitations.md`).
+
+This is the one point in the build where a human check-in is genuinely needed: the items above require credentials or hardware (a GPU, cloud auth, API keys) that don't exist in this build environment. Everything else was built and verified end-to-end without stopping.

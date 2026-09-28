@@ -1,0 +1,291 @@
+{
+  "n_queries": 28,
+  "n_sop_chunks": 63,
+  "recall_at_k": {
+    "1": 0.9285714285714286,
+    "3": 0.9642857142857143,
+    "5": 1.0
+  },
+  "per_query": [
+    {
+      "query": "Can a drone ever fly into a Class A no-fly zone if the operator approves it?",
+      "expected": "SOP-001",
+      "retrieved_top1": "SOP-001",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What happens if a zone map update reclassifies the drone's current position mid-mission?",
+      "expected": "SOP-001",
+      "retrieved_top1": "SOP-001",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What is the minimum battery percentage required to start a mission?",
+      "expected": "SOP-002",
+      "retrieved_top1": "SOP-002",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "At what battery level does the drone have to return to home?",
+      "expected": "SOP-002",
+      "retrieved_top1": "SOP-002",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How do cold temperatures affect battery thresholds?",
+      "expected": "SOP-002",
+      "retrieved_top1": "SOP-002",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What severity level should unauthorized personnel in a restricted zone get?",
+      "expected": "SOP-003",
+      "retrieved_top1": "SOP-003",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "Does a low-confidence finding get automatically downgraded in severity?",
+      "expected": "SOP-003",
+      "retrieved_top1": "SOP-003",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "Which actions require an operator to approve before they happen?",
+      "expected": "SOP-004",
+      "retrieved_top1": "SOP-004",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What information must be recorded when an operator approves or rejects an action?",
+      "expected": "SOP-004",
+      "retrieved_top1": "SOP-004",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What confidence score triggers the low-confidence fallback procedure?",
+      "expected": "SOP-005",
+      "retrieved_top1": "SOP-005",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How many times can the drone re-capture an image before escalating to a human?",
+      "expected": "SOP-005",
+      "retrieved_top1": "SOP-005",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What should the orchestrator do when a capture request times out?",
+      "expected": "SOP-006",
+      "retrieved_top1": "SOP-005",
+      "hit": {
+        "1": false,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How many retries are allowed before a drone is declared unreachable?",
+      "expected": "SOP-006",
+      "retrieved_top1": "SOP-006",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What happens when the Perception agent and Verifier agent disagree twice in a row?",
+      "expected": "SOP-007",
+      "retrieved_top1": "SOP-007",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "Is the full message exchange between perception and verifier agents logged?",
+      "expected": "SOP-007",
+      "retrieved_top1": "SOP-007",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What checks must pass before a mission can be dispatched?",
+      "expected": "SOP-008",
+      "retrieved_top1": "SOP-008",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What is the maximum number of waypoints allowed per mission?",
+      "expected": "SOP-008",
+      "retrieved_top1": "SOP-013",
+      "hit": {
+        "1": false,
+        "3": false,
+        "5": true
+      }
+    },
+    {
+      "query": "What sections must be included in every inspection report?",
+      "expected": "SOP-009",
+      "retrieved_top1": "SOP-009",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "Is the Report Writer allowed to soften or amplify findings language?",
+      "expected": "SOP-009",
+      "retrieved_top1": "SOP-009",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How does a new mission use findings from a previous mission at the same site?",
+      "expected": "SOP-010",
+      "retrieved_top1": "SOP-010",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How long is mission and finding data retained in persistent memory?",
+      "expected": "SOP-010",
+      "retrieved_top1": "SOP-010",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What imagery conditions are checked for parity in perception accuracy?",
+      "expected": "SOP-011",
+      "retrieved_top1": "SOP-011",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What accuracy gap threshold triggers a parity flag?",
+      "expected": "SOP-011",
+      "retrieved_top1": "SOP-011",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How close can two drones be to each other at the same site?",
+      "expected": "SOP-012",
+      "retrieved_top1": "SOP-012",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What happens when weather is flagged severe?",
+      "expected": "SOP-013",
+      "retrieved_top1": "SOP-013",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "How does moderate weather change the waypoint limit?",
+      "expected": "SOP-013",
+      "retrieved_top1": "SOP-013",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "What fields must every audit log event contain?",
+      "expected": "SOP-014",
+      "retrieved_top1": "SOP-014",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    },
+    {
+      "query": "Can audit log entries be edited or deleted from the frontend?",
+      "expected": "SOP-014",
+      "retrieved_top1": "SOP-014",
+      "hit": {
+        "1": true,
+        "3": true,
+        "5": true
+      }
+    }
+  ]
+}
