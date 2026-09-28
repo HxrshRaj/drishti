@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / frontend
+node_modules/
+.next/
+out/
+frontend/.env.local
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Model weights / caches
+*.safetensors
+*.bin
+!drone-gateway/**/*.bin
+.cache/
+hf_cache/
+models/weights/
+
+# Data: the sampled VisDrone subset (data/images, data/labels) IS committed for
+# reproducibility — see docs/data.md for license (CC BY-NC-SA 3.0, non-commercial).
+# Only raw/full dataset downloads and local runtime state are ignored below.
+data/raw_cache/
+data/memory/*.db
+data/memory/*.sqlite*
+
+# Milvus / vector store local state
+milvus_lite_data/
+*.db-journal
+
+# Logs, traces, benchmark artifacts (raw)
+*.log
+logs/
+benchmarks/results/*.json
+!benchmarks/results/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml

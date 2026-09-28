@@ -1,0 +1,20 @@
+{
+  "n_images": 350,
+  "split_counts": {
+    "train": 264,
+    "test": 65,
+    "val": 21
+  },
+  "class_counts": {
+    "car": 7798,
+    "people": 1906,
+    "motor": 1752,
+    "van": 1308,
+    "bicycle": 680,
+    "truck": 631,
+    "bus": 385,
+    "tricycle": 253
+  },
+  "seed": 7,
+  "min_detections": 2
+}
