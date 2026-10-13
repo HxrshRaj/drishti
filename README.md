@@ -97,6 +97,7 @@ Without Docker, each service can run directly — see the README in
 | GPU benchmarks | *Pending — see `docs/benchmarks.md`; this environment has no GPU.* |
 | LangSmith tracing | *Pending user's `LANGSMITH_API_KEY`.* |
 | Pinecone live run | *Pending user's `PINECONE_API_KEY`.* |
+| Azure serverless pipeline (Blob Storage, Functions, Azure OpenAI, Table Storage) | Code, Pulumi program and 24 tests written. Storage tested against the Azurite emulator, infra against mocked Azure; *not deployed, real Azure OpenAI not exercised. See `deploy/azure/`.* |
 | GCP deployment | *Pending `gcloud` auth — see `deploy/gcp/`.* |
 | AWS serverless pipeline (S3, Lambda, Bedrock, DynamoDB, API Gateway) | Code, CDK stack and 23 tests written. Tested with emulated S3/DynamoDB and a fake Bedrock client; *not deployed, real Bedrock not exercised. See `deploy/aws/`.* |
 

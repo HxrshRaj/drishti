@@ -1,0 +1,5 @@
+-r src/requirements.txt
+azure-storage-blob
+pulumi>=3.130
+pulumi-azure-native>=3.0
+pytest>=8
