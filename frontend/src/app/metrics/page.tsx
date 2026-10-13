@@ -46,7 +46,7 @@ export default function MetricsPage() {
     <div className="space-y-6">
       <h1 className="text-xl font-semibold">Metrics</h1>
       <p className="text-sm text-neutral-500 -mt-3">
-        Every number below is read live from a JSON file this project's own benchmark/eval scripts wrote after a
+        Every number below is read live from a JSON file this project&apos;s own benchmark/eval scripts wrote after a
         real run — nothing here is hand-entered. See <code>docs/benchmarks.md</code> and{" "}
         <code>docs/bias-report.md</code> for the full write-up.
       </p>
