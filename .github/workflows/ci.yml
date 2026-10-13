@@ -93,3 +93,27 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+
+  azure-pipeline:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: deploy/azure
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: deploy/azure/requirements-dev.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: pip install -r requirements-dev.txt
+      - name: Start the Azure Storage emulator (Azurite)
+        run: |
+          npm install -g azurite
+          azurite --silent --location /tmp/azurite --skipApiVersionCheck &
+          sleep 5
+      - name: Function, storage and infrastructure tests
+        run: python -m pytest tests -q

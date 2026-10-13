@@ -1,0 +1,7 @@
+name: drishti-azure
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+main: infra/
+description: Drishti serverless inspection pipeline on Azure
