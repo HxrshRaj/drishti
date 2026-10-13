@@ -69,7 +69,7 @@ of why each framework owns which slice, and where the seams are awkward.
   corpus, memory store.
 - [`docs/`](docs) — architecture, benchmarks, safety, bias report, data
   provenance, limitations.
-- [`deploy/`](deploy) — GCP Cloud Run deployment scripts.
+- [`deploy/`](deploy) — GCP Cloud Run deployment scripts, and [`deploy/aws/`](deploy/aws): a serverless AWS version of the perception step (S3, Lambda, Bedrock, DynamoDB, API Gateway; CDK).
 
 ## Running it locally
 
@@ -98,6 +98,7 @@ Without Docker, each service can run directly — see the README in
 | LangSmith tracing | *Pending user's `LANGSMITH_API_KEY`.* |
 | Pinecone live run | *Pending user's `PINECONE_API_KEY`.* |
 | GCP deployment | *Pending `gcloud` auth — see `deploy/gcp/`.* |
+| AWS serverless pipeline (S3, Lambda, Bedrock, DynamoDB, API Gateway) | Code, CDK stack and 23 tests written. Tested with emulated S3/DynamoDB and a fake Bedrock client; *not deployed, real Bedrock not exercised. See `deploy/aws/`.* |
 
 This table is a summary; the authoritative, evidence-backed version is the
 **Final report** section at the bottom of this README, and `docs/limitations.md`.
