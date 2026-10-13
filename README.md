@@ -69,7 +69,7 @@ of why each framework owns which slice, and where the seams are awkward.
   corpus, memory store.
 - [`docs/`](docs) — architecture, benchmarks, safety, bias report, data
   provenance, limitations.
-- [`deploy/`](deploy) — GCP Cloud Run deployment scripts.
+- [`deploy/`](deploy) — GCP Cloud Run deployment scripts, and [`deploy/aws/`](deploy/aws): a serverless AWS version of the perception step (S3, Lambda, Bedrock, DynamoDB, API Gateway; CDK).
 
 ## Running it locally
 
@@ -99,6 +99,7 @@ Without Docker, each service can run directly — see the README in
 | Pinecone live run | *Pending user's `PINECONE_API_KEY`.* |
 | Azure serverless pipeline (Blob Storage, Functions, Azure OpenAI, Table Storage) | Code, Pulumi program and 24 tests written. Storage tested against the Azurite emulator, infra against mocked Azure; *not deployed, real Azure OpenAI not exercised. See `deploy/azure/`.* |
 | GCP deployment | *Pending `gcloud` auth — see `deploy/gcp/`.* |
+| AWS serverless pipeline (S3, Lambda, Bedrock, DynamoDB, API Gateway) | Code, CDK stack and 23 tests written. Tested with emulated S3/DynamoDB and a fake Bedrock client; *not deployed, real Bedrock not exercised. See `deploy/aws/`.* |
 
 This table is a summary; the authoritative, evidence-backed version is the
 **Final report** section at the bottom of this README, and `docs/limitations.md`.
