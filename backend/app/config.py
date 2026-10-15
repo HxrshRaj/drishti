@@ -43,6 +43,10 @@ class Settings(BaseSettings):
     # Optional hosted LLM upgrade
     anthropic_api_key: str = ""
     openai_api_key: str = ""
+    azure_openai_endpoint: str = ""
+    azure_openai_api_key: str = ""
+    azure_openai_deployment: str = ""
+    azure_openai_api_version: str = "2024-10-21"
 
     # Data paths
     data_sops_dir: Path = _REPO_ROOT / "data" / "sops"

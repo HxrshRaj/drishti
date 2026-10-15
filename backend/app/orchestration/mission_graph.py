@@ -19,6 +19,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import interrupt
 
+from app.agentkit.tracing import traced_node
 from app.config import settings
 from app.memory import repository as repo
 from app.orchestration.gateway_client import DroneGatewayClient, GatewayError
@@ -310,13 +311,13 @@ def make_report_node(deps: MissionGraphDeps):
 
 def build_mission_graph(deps: MissionGraphDeps, checkpointer):
     graph = StateGraph(MissionState)
-    graph.add_node("plan", make_plan_node(deps))
-    graph.add_node("dispatch", make_dispatch_node(deps))
-    graph.add_node("capture", make_capture_node(deps))
-    graph.add_node("perceive", make_perceive_node(deps))
-    graph.add_node("verify", make_verify_node(deps))
-    graph.add_node("decide", make_decide_node(deps))
-    graph.add_node("report", make_report_node(deps))
+    graph.add_node("plan", traced_node("plan", make_plan_node(deps)))
+    graph.add_node("dispatch", traced_node("dispatch", make_dispatch_node(deps)))
+    graph.add_node("capture", traced_node("capture", make_capture_node(deps)))
+    graph.add_node("perceive", traced_node("perceive", make_perceive_node(deps)))
+    graph.add_node("verify", traced_node("verify", make_verify_node(deps)))
+    graph.add_node("decide", traced_node("decide", make_decide_node(deps)))
+    graph.add_node("report", traced_node("report", make_report_node(deps)))
 
     graph.add_edge(START, "plan")
     graph.add_edge("plan", "dispatch")

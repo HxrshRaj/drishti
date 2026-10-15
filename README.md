@@ -99,6 +99,7 @@ Without Docker, each service can run directly — see the README in
 | Pinecone live run | *Pending user's `PINECONE_API_KEY`.* |
 | Azure serverless pipeline (Blob Storage, Functions, Azure OpenAI, Table Storage) | Code, Pulumi program and 24 tests written. Storage tested against the Azurite emulator, infra against mocked Azure; *not deployed, real Azure OpenAI not exercised. See `deploy/azure/`.* |
 | GCP deployment | *Pending `gcloud` auth — see `deploy/gcp/`.* |
+| Agent harness, middleware, OpenTelemetry tracing, DeepAgents, eval regression gate (`backend/app/agentkit`, [docs](docs/agentkit.md)) | Real, 28 tests. MLflow OTLP export verified by hand against a local server; MongoDB store tested on mongomock only; Azure OpenAI adapter tested against a mock transport only; Langfuse/LangSmith export not run. |
 | AWS serverless pipeline (S3, Lambda, Bedrock, DynamoDB, API Gateway) | Code, CDK stack and 23 tests written. Tested with emulated S3/DynamoDB and a fake Bedrock client; *not deployed, real Bedrock not exercised. See `deploy/aws/`.* |
 
 This table is a summary; the authoritative, evidence-backed version is the

@@ -22,6 +22,7 @@ from autogen_core.models import ModelFamily, ModelInfo
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 
 from app.agents.schemas import VerificationExchange, VerifierOutcome, VerifierVerdict
+from app.config import settings
 from app.llm.provider import resolve_llm_backend
 from app.memory import repository as repo
 from app.perception.schemas import VLMFinding
@@ -43,6 +44,13 @@ def _make_model_client() -> OpenAIChatCompletionClient:
         )
     if backend.kind == "openai":
         return OpenAIChatCompletionClient(model=backend.model, api_key=backend.api_key)
+    if backend.kind == "azure":
+        from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
+
+        return AzureOpenAIChatCompletionClient(
+            azure_deployment=backend.model, model=backend.model, api_key=backend.api_key,
+            azure_endpoint=settings.azure_openai_endpoint, api_version=backend.api_version,
+        )
     # AutoGen's Anthropic support lives in a separate optional extra not
     # installed here; fall back to the local model client and note this in
     # docs/architecture.md as a known seam.
