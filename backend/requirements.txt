@@ -9,7 +9,7 @@ httpx==0.28.1
 # Orchestration / agents
 langgraph==1.2.12
 langgraph-checkpoint-sqlite==3.1.1
-langchain-core==1.6.5
+langchain-core==1.6.10
 langchain-openai==1.6.6
 autogen-agentchat==0.7.5
 autogen-core==0.7.5
@@ -30,7 +30,7 @@ accelerate==1.15.0
 pillow==12.3.0
 
 # Observability
-langsmith==0.14.1
+langsmith==0.14.8
 
 # Data / analysis
 pandas==3.0.6
