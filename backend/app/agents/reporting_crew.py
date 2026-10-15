@@ -10,6 +10,7 @@ import json
 from crewai import LLM, Agent, Crew, Process, Task
 
 from app.agents.tools import compute_findings_summary, findings_summary_tool
+from app.config import settings
 from app.llm.provider import resolve_llm_backend
 from app.memory import repository as repo
 
@@ -20,6 +21,9 @@ def _make_llm() -> LLM:
         return LLM(model=f"openai/{backend.model}", base_url=backend.base_url, api_key=backend.api_key)
     if backend.kind == "openai":
         return LLM(model=f"openai/{backend.model}", api_key=backend.api_key)
+    if backend.kind == "azure":
+        return LLM(model=f"azure/{backend.model}", api_key=backend.api_key,
+                   base_url=settings.azure_openai_endpoint, api_version=backend.api_version)
     return LLM(model=f"anthropic/{backend.model}", api_key=backend.api_key)
 
 

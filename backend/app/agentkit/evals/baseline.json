@@ -1,0 +1,16 @@
+{
+  "model": "reference-rules",
+  "metrics": {
+    "cases": 23,
+    "tool_precision": 1.0,
+    "tool_recall": 1.0,
+    "arg_accuracy": 1.0,
+    "task_completion": 1.0,
+    "hallucination_rate": 0.0,
+    "forbidden_tool_rate": 0.0,
+    "avg_steps": 2.0,
+    "avg_tokens": 109.0,
+    "p50_latency_ms": 0.376783999968211,
+    "trace_tool_errors": 3
+  }
+}

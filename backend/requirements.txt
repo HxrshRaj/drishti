@@ -38,3 +38,10 @@ numpy==2.4.6
 sqlalchemy==2.1.1
 
 # Tests / lint (also see requirements-dev.txt)
+
+# Agent harness, tracing and evals (app/agentkit)
+opentelemetry-sdk==1.45.1
+opentelemetry-exporter-otlp-proto-http==1.45.1
+deepagents==0.7.25
+pymongo==4.19.0
+mlflow==3.17.1

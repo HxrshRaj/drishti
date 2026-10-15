@@ -35,6 +35,8 @@ jobs:
           DATA_LABELS_FILE: ../data/labels/labels.jsonl
           MEMORY_DB_PATH: ./data/ci_memory.db
         run: pytest -q
+      - name: Agent eval regression gate (reference model; fails on regression vs baseline)
+        run: python -m app.agentkit.evals.runner --model reference
 
   gateway-lint-and-test:
     runs-on: ubuntu-latest
